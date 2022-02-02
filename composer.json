@@ -17,10 +17,10 @@
     ],
     "minimum-stability": "stable",
     "require": {
-        "omnipay/common": "~3.0"
+        "omnipay/common": "^3.1"
     },
     "require-dev": {
-        "omnipay/tests": "~3.0"
+        "omnipay/tests": "^3.1"
     },
     "autoload": {
         "psr-4": { "Omnipay\\Xendit\\" : "src/" }
