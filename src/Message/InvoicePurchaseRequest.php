@@ -35,7 +35,7 @@ class InvoicePurchaseRequest extends AbstractRequest
 
     public function getData()
     {
-        $this->guardAmount(intval($this->getAmount()));
+        // $this->guardAmount(intval($this->getAmount()));
 
         return [
             'external_id' => (string)$this->getTransactionId(),
