@@ -30,7 +30,7 @@ class InvoiceCompletePurchaseResponse extends AbstractResponse
 
     public function getTransactionReference()
     {
-        return $this->emptyIfNotFound($this->data, 'id');
+        return $this->emptyIfNotFound($this->data, 'external_id');
     }
 
     protected function emptyIfNotFound($haystack, $needle)
