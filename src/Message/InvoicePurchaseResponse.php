@@ -62,7 +62,7 @@ class InvoicePurchaseResponse extends AbstractResponse
 
     public function getTransactionReference()
     {
-        return $this->arrayGet($this->data, 'id');
+        return $this->arrayGet($this->data, 'external_id');
     }
 
     public function arrayGet($data, $key, $default = null)
