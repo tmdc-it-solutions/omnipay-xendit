@@ -8,9 +8,11 @@
 
 namespace Omnipay\Xendit\Message;
 
+
+use Omnipay\Common\Message\AbstractResponse;
 use Omnipay\Common\Message\RequestInterface;
 
-class InvoicePurchaseResponse extends Response
+class InvoicePurchaseResponse extends AbstractResponse
 {
     const STATUS_PENDING = 'PENDING';
     const STATUS_PAID = 'PAID';
@@ -45,7 +47,7 @@ class InvoicePurchaseResponse extends Response
 
     public function getRedirectUrl()
     {
-        return $this->data['invoice_url'];
+        return $this->arrayGet($this->data, 'invoice_url');
     }
 
     public function getRedirectMethod()
