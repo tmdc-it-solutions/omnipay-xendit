@@ -40,9 +40,9 @@ class InvoicePurchaseRequest extends AbstractRequest
         return [
             'external_id' => (string)$this->getTransactionId(),
             'amount' => intval($this->getAmount()),
-            'payer_email' => $this->getCard()->getEmail(),
             'description' => $this->getDescription(),
-            'success_redirect_url' => $this->getReturnUrl()
+            'success_redirect_url' => $this->getReturnUrl(),
+            'failure_redirect_url' => $this->getCancelUrl()
         ];
     }
 
