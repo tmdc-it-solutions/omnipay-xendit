@@ -41,8 +41,8 @@ class InvoicePurchaseRequest extends AbstractRequest
             'external_id' => (string)$this->getExternalId(),
             'amount' => intval($this->getAmount()),
             'description' => $this->getDescription(),
-            'success_redirect_url' => $this->getSuccesRedirectUrl(),
-            'failure_redirect_url' => $this->getFailureRedirectUrl()
+            'success_redirect_url' => (string)$this->getSuccesRedirectUrl(),
+            'failure_redirect_url' => (string)$this->getFailureRedirectUrl()
         ];
     }
 
