@@ -29,8 +29,10 @@ class InvoicePurchaseRequest extends AbstractRequest
             )
             ->getBody()
             ->getContents();
+        
+            return $data;
 
-        return new InvoicePurchaseResponse($this, $response);
+        // return new InvoicePurchaseResponse($this, $response);
     }
 
     public function getData()
