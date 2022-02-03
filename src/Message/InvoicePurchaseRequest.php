@@ -29,10 +29,8 @@ class InvoicePurchaseRequest extends AbstractRequest
             )
             ->getBody()
             ->getContents();
-        
-            return $data;
 
-        // return new InvoicePurchaseResponse($this, $response);
+        return new InvoicePurchaseResponse($this, $response);
     }
 
     public function getData()
@@ -43,7 +41,7 @@ class InvoicePurchaseRequest extends AbstractRequest
             'external_id' => (string)$this->getExternalId(),
             'amount' => intval($this->getAmount()),
             'description' => $this->getDescription(),
-            'success_redirect_url' => (string)$this->getSuccesRedirectUrl(),
+            'success_redirect_url' => (string)$this->getSuccessRedirectUrl(),
             'failure_redirect_url' => (string)$this->getFailureRedirectUrl()
         ];
     }
@@ -78,12 +76,12 @@ class InvoicePurchaseRequest extends AbstractRequest
         return $this->setParameter('description', $value);
     }
 
-    public function getSuccesRedirectUrl()
+    public function getSuccessRedirectUrl()
     {
         return $this->getParameter('success_redirect_url');
     }
 
-    public function setSuccesRedirectUrl($value)
+    public function setSuccessRedirectUrl($value)
     {
         return $this->setParameter('success_redirect_url', $value);
     }
