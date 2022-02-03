@@ -33,18 +33,68 @@ class InvoicePurchaseRequest extends AbstractRequest
         return new InvoicePurchaseResponse($this, $response);
     }
 
-    // public function getData()
-    // {
-    //     // $this->guardAmount(intval($this->getAmount()));
+    public function getData()
+    {
+        // $this->guardAmount(intval($this->getAmount()));
 
-    //     return [
-    //         'external_id' => (string)$this->getTransactionId(),
-    //         'amount' => intval($this->getAmount()),
-    //         'description' => $this->getDescription(),
-    //         'success_redirect_url' => $this->getReturnUrl(),
-    //         'failure_redirect_url' => $this->getCancelUrl()
-    //     ];
-    // }
+        return [
+            'external_id' => (string)$this->getTransactionId(),
+            'amount' => intval($this->getAmount()),
+            'description' => $this->getDescription(),
+            'success_redirect_url' => $this->getSuccesRedirectUrl(),
+            'failure_redirect_url' => $this->getFailureRedirectUrl()
+        ];
+    }
+
+    public function getTransactionId()
+    {
+        return $this->getParameter('external_id');
+    }
+
+    public function setTransactionId($value)
+    {
+        return $this->setParameter('external_id', $value);
+    }
+
+    public function getAmount()
+    {
+        return $this->getParameter('amount');
+    }
+
+    public function setAmount($value)
+    {
+        return $this->setParameter('amount', $value);
+    }
+
+    public function getDescription()
+    {
+        return $this->getParameter('description');
+    }
+
+    public function setDescription($value)
+    {
+        return $this->setParameter('description', $value);
+    }
+
+    public function getSuccesRedirectUrl()
+    {
+        return $this->getParameter('success_redirect_url');
+    }
+
+    public function setSuccesRedirectUrl($value)
+    {
+        return $this->setParameter('success_redirect_url', $value);
+    }
+
+    public function getFailureRedirectUrl()
+    {
+        return $this->getParameter('failure_redirect_url');
+    }
+
+    public function setFailureRedirectUrl($value)
+    {
+        return $this->setParameter('failure_redirect_url', $value);
+    }
 
     private function guardAmount($amount)
     {
