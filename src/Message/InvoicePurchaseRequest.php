@@ -38,7 +38,7 @@ class InvoicePurchaseRequest extends AbstractRequest
         // $this->guardAmount(intval($this->getAmount()));
 
         return [
-            'external_id' => (string)$this->getTransactionId(),
+            'external_id' => (string)$this->getExternalId(),
             'amount' => intval($this->getAmount()),
             'description' => $this->getDescription(),
             'success_redirect_url' => $this->getSuccesRedirectUrl(),
@@ -46,12 +46,12 @@ class InvoicePurchaseRequest extends AbstractRequest
         ];
     }
 
-    public function getTransactionId()
+    public function getExternalId()
     {
         return $this->getParameter('external_id');
     }
 
-    public function setTransactionId($value)
+    public function setExternalId($value)
     {
         return $this->setParameter('external_id', $value);
     }
