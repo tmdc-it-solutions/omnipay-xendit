@@ -33,18 +33,18 @@ class InvoicePurchaseRequest extends AbstractRequest
         return new InvoicePurchaseResponse($this, $response);
     }
 
-    public function getData()
-    {
-        // $this->guardAmount(intval($this->getAmount()));
+    // public function getData()
+    // {
+    //     // $this->guardAmount(intval($this->getAmount()));
 
-        return [
-            'external_id' => (string)$this->getTransactionId(),
-            'amount' => intval($this->getAmount()),
-            'description' => $this->getDescription(),
-            'success_redirect_url' => $this->getReturnUrl(),
-            'failure_redirect_url' => $this->getCancelUrl()
-        ];
-    }
+    //     return [
+    //         'external_id' => (string)$this->getTransactionId(),
+    //         'amount' => intval($this->getAmount()),
+    //         'description' => $this->getDescription(),
+    //         'success_redirect_url' => $this->getReturnUrl(),
+    //         'failure_redirect_url' => $this->getCancelUrl()
+    //     ];
+    // }
 
     private function guardAmount($amount)
     {
