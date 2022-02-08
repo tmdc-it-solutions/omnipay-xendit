@@ -43,7 +43,7 @@ class InvoicePurchaseRequest extends AbstractRequest
             'description' => $this->getDescription(),
             'success_redirect_url' => (string)$this->getSuccessRedirectUrl(),
             'failure_redirect_url' => (string)$this->getFailureRedirectUrl(),
-            'payment_methods' => $this->getPaymentMethods(),
+            'payment_methods' => (array)$this->getPaymentMethods(),
         ];
     }
 
