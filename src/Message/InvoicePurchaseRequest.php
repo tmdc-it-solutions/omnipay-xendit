@@ -42,7 +42,8 @@ class InvoicePurchaseRequest extends AbstractRequest
             'amount' => intval($this->getAmount()),
             'description' => $this->getDescription(),
             'success_redirect_url' => (string)$this->getSuccessRedirectUrl(),
-            'failure_redirect_url' => (string)$this->getFailureRedirectUrl()
+            'failure_redirect_url' => (string)$this->getFailureRedirectUrl(),
+            'payment_methods' => $this->getPaymentMethods(),
         ];
     }
 
@@ -94,6 +95,16 @@ class InvoicePurchaseRequest extends AbstractRequest
     public function setFailureRedirectUrl($value)
     {
         return $this->setParameter('failure_redirect_url', $value);
+    }
+
+    public function getPaymentMethods()
+    {
+        return $this->getParameter('payment_methods');
+    }
+
+    public function setPaymentMethods($value)
+    {
+        return $this->setParameter('payment_methods', $value);
     }
 
     private function guardAmount($amount)
