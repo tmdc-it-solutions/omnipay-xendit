@@ -65,6 +65,11 @@ class InvoicePurchaseResponse extends AbstractResponse
         return $this->arrayGet($this->data, 'external_id');
     }
 
+    public function getMessage()
+    {
+        return $this->arrayGet($this->data, 'message');
+    }
+
     public function arrayGet($data, $key, $default = null)
     {
         if (!isset($data[$key])) {
