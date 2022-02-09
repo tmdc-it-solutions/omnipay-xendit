@@ -29,7 +29,7 @@ class InvoicePurchaseResponse extends AbstractResponse
 
     public function isSuccessful()
     {
-        return isset($this->data->error_code) ? FALSE : TRUE;
+        return $this->arrayGet($this->data, 'error_code') != null ? TRUE : FALSE;
     }
 
     public function isPending()
