@@ -29,10 +29,7 @@ class InvoicePurchaseResponse extends AbstractResponse
 
     public function isSuccessful()
     {
-        return in_array(
-            strtolower($this->arrayGet($this->data, 'status')),
-            array_map('strtolower', [self::STATUS_PAID, self::STATUS_SETTLED])
-        );
+        return isset($this->data->error_code) ? FALSE : TRUE;
     }
 
     public function isPending()
@@ -42,7 +39,7 @@ class InvoicePurchaseResponse extends AbstractResponse
 
     public function isRedirect()
     {
-        return !$this->isSuccessful();
+        return $this->isSuccessful();
     }
 
     public function getRedirectUrl()
