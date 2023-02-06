@@ -39,7 +39,7 @@ class InvoicePurchaseResponse extends AbstractResponse
 
     public function isRedirect()
     {
-        return $this->isSuccessful();
+        return $this->getRedirectUrl() ? TRUE : FALSE;
     }
 
     public function getRedirectUrl()
