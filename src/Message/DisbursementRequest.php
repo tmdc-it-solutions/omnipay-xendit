@@ -73,7 +73,7 @@ class DisbursementRequest extends AbstractRequest
         return $this->getParameter('description');
     }
 
-    public function setBankCode($value)
+    public function setDescription($value)
     {
         return $this->setParameter('description', $value);
     }
@@ -83,7 +83,7 @@ class DisbursementRequest extends AbstractRequest
         return $this->getParameter('bank_code');
     }
 
-    public function setSuccessRedirectUrl($value)
+    public function setBankCode($value)
     {
         return $this->setParameter('bank_code', $value);
     }
