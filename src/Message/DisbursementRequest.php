@@ -39,23 +39,23 @@ class DisbursementRequest extends AbstractRequest
         // $this->guardAmount(intval($this->getAmount()));
 
         return [
-            'external_id' => (string)$this->getExternalId(),
+            'reference_id' => (string)$this->getExternalId(),
             'amount' => intval($this->getAmount()),
             'description' => $this->getDescription(),
-            'bank_code' => (string)$this->getBankCode(),
-            'account_holder_name' => (string)$this->getAccountHolderName(),
+            'channel_code' => (string)$this->getChannelCode(),
+            'account_name' => (string)$this->getAccountName(),
             'account_number' => (string)$this->getAccountNumber(),
         ];
     }
 
-    public function getExternalId()
+    public function getReferenceId()
     {
-        return $this->getParameter('external_id');
+        return $this->getParameter('reference_id');
     }
 
-    public function setExternalId($value)
+    public function setReferenceId($value)
     {
-        return $this->setParameter('external_id', $value);
+        return $this->setParameter('reference_id', $value);
     }
 
     public function getAmount()
@@ -78,24 +78,24 @@ class DisbursementRequest extends AbstractRequest
         return $this->setParameter('description', $value);
     }
 
-    public function getBankCode()
+    public function getChannelCode()
     {
-        return $this->getParameter('bank_code');
+        return $this->getParameter('channel_code');
     }
 
-    public function setBankCode($value)
+    public function setChannelCode($value)
     {
-        return $this->setParameter('bank_code', $value);
+        return $this->setParameter('channel_code', $value);
     }
 
-    public function getAccountHolderName()
+    public function getAccountName()
     {
-        return $this->getParameter('account_holder_name');
+        return $this->getParameter('account_name');
     }
 
-    public function setAccountHolderName($value)
+    public function setAccountName($value)
     {
-        return $this->setParameter('account_holder_name', $value);
+        return $this->setParameter('account_name', $value);
     }
 
     public function getAccountNumber()
