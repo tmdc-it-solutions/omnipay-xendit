@@ -12,7 +12,7 @@ namespace Omnipay\Xendit;
 
 use Omnipay\Common\AbstractGateway;
 
-class InvoiceGateway extends AbstractGateway
+class DisbursementGateway extends AbstractGateway
 {
     public function getName()
     {
