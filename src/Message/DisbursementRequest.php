@@ -44,7 +44,7 @@ class DisbursementRequest extends AbstractRequest
             'description' => $this->getDescription(),
             'bank_code' => (string)$this->getBankCode(),
             'account_holder_name' => (string)$this->getAccountHolderName(),
-            'account_number' => (array)$this->getAccountNumber(),
+            'account_number' => (string)$this->getAccountNumber(),
         ];
     }
 
