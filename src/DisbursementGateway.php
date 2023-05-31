@@ -36,7 +36,7 @@ class DisbursementGateway extends AbstractGateway
         return $this->setParameter('secretApiKey', $serverApiKey);
     }
 
-    public function purchase(array $parameters = array())
+    public function disbursement(array $parameters = array())
     {
         return $this->createRequest('\Omnipay\Xendit\Message\DisbursementRequest', $parameters);
     }
