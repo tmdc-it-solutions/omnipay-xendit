@@ -21,10 +21,11 @@ class DisbursementRequest extends AbstractRequest
         $response = $this->httpClient
             ->request(
                 'POST',
-                'https://api.xendit.co/disbursements',
+                'https://api.xendit.co/batch_disbursements',
                 [
                     'Authorization' => 'Basic ' . base64_encode($this->getSecretApiKey() . ':'),
-                    'Content-Type' => 'application/json'
+                    'Content-Type' => 'application/json',
+                    'XENDIT-IDEMPOTENCY-KEY' => (string)$this->getReferenceId(),
                 ],
                 json_encode($data)
             )
@@ -39,12 +40,15 @@ class DisbursementRequest extends AbstractRequest
         // $this->guardAmount(intval($this->getAmount()));
 
         return [
-            'reference_id' => (string)$this->getReferenceId(),
-            'amount' => intval($this->getAmount()),
-            'description' => $this->getDescription(),
-            'channel_code' => (string)$this->getChannelCode(),
-            'account_name' => (string)$this->getAccountName(),
-            'account_number' => (string)$this->getAccountNumber(),
+            'reference' => [
+                'reference_id' => (string)$this->getReferenceId(),
+                'amount' => intval($this->getAmount()),
+                'description' => $this->getDescription(),
+                'channel_code' => (string)$this->getChannelCode(),
+                'currency' => (string)$this->getCurrency(),
+                'account_name' => (string)$this->getAccountName(),
+                'account_number' => (string)$this->getAccountNumber(),
+            ]
         ];
     }
 
@@ -86,6 +90,16 @@ class DisbursementRequest extends AbstractRequest
     public function setChannelCode($value)
     {
         return $this->setParameter('channel_code', $value);
+    }
+
+    public function getCurrency()
+    {
+        return $this->getParameter('currency');
+    }
+
+    public function setCurrency($value)
+    {
+        return $this->setParameter('currency', $value);
     }
 
     public function getAccountName()
