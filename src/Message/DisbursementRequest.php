@@ -39,7 +39,7 @@ class DisbursementRequest extends AbstractRequest
         // $this->guardAmount(intval($this->getAmount()));
 
         return [
-            'reference_id' => (string)$this->getExternalId(),
+            'reference_id' => (string)$this->getReferenceId(),
             'amount' => intval($this->getAmount()),
             'description' => $this->getDescription(),
             'channel_code' => (string)$this->getChannelCode(),
