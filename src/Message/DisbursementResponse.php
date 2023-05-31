@@ -10,55 +10,125 @@
 namespace Omnipay\Xendit\Message;
 
 
-use Omnipay\Common\Message\AbstractResponse;
-use Omnipay\Common\Message\RequestInterface;
+use Omnipay\Common\Exception\InvalidRequestException;
 
-class DisbursementResponse extends AbstractResponse
+class DisbursementRequest extends AbstractRequest
 {
-    const STATUS_PENDING = 'PENDING';
-    const STATUS_PAID = 'PAID';
-    const STATUS_SETTLED = 'SETTLED';
+    const MIN_AMOUNT = 11000;
 
-    public function __construct(RequestInterface $request, $data)
+    public function sendData($data)
     {
-        parent::__construct($request, $data);
+        $response = $this->httpClient
+            ->request(
+                'POST',
+                'https://api.xendit.co/batch_disbursements',
+                [
+                    'Authorization' => 'Basic ' . base64_encode($this->getSecretApiKey() . ':'),
+                    'Content-Type' => 'application/json',
+                    'XENDIT-IDEMPOTENCY-KEY' => (string)$this->getReferenceId(),
+                ],
+                json_encode($data)
+            )
+            ->getBody()
+            ->getContents();
 
-        if (!is_array($data)) {
-            $this->data = json_decode(trim($data), true);
+        return new DisbursementResponse($this, $response);
+    }
+
+    public function getData()
+    {
+        // $this->guardAmount(intval($this->getAmount()));
+
+        return [
+            'reference' => (string)$this->getReferenceId(),
+            'disbursements' => [
+                [
+                    'external_id' => (string)$this->getReferenceId(),
+                    'amount' => intval($this->getAmount()),
+                    'description' => $this->getDescription(),
+                    'bank_code' => (string)$this->getChannelCode(),
+                    'currency' => (string)$this->getCurrency(),
+                    'bank_account_name' => (string)$this->getAccountName(),
+                    'bank_account_number' => (string)$this->getAccountNumber(),
+                ]
+            ]
+        ];
+    }
+
+    public function getReferenceId()
+    {
+        return $this->getParameter('reference_id');
+    }
+
+    public function setReferenceId($value)
+    {
+        return $this->setParameter('reference_id', $value);
+    }
+
+    public function getAmount()
+    {
+        return $this->getParameter('amount');
+    }
+
+    public function setAmount($value)
+    {
+        return $this->setParameter('amount', $value);
+    }
+
+    public function getDescription()
+    {
+        return $this->getParameter('description');
+    }
+
+    public function setDescription($value)
+    {
+        return $this->setParameter('description', $value);
+    }
+
+    public function getChannelCode()
+    {
+        return $this->getParameter('channel_code');
+    }
+
+    public function setChannelCode($value)
+    {
+        return $this->setParameter('channel_code', $value);
+    }
+
+    public function getCurrency()
+    {
+        return $this->getParameter('currency');
+    }
+
+    public function setCurrency($value)
+    {
+        return $this->setParameter('currency', $value);
+    }
+
+    public function getAccountName()
+    {
+        return $this->getParameter('account_name');
+    }
+
+    public function setAccountName($value)
+    {
+        return $this->setParameter('account_name', $value);
+    }
+
+    public function getAccountNumber()
+    {
+        return $this->getParameter('account_number');
+    }
+
+    public function setAccountNumber($value)
+    {
+        return $this->setParameter('account_number', $value);
+    }
+
+    private function guardAmount($amount)
+    {
+        if ($amount < self::MIN_AMOUNT) {
+            throw new InvalidRequestException('The minimum amount to create an disbursement is 11000');
         }
-    }
-
-    public function isSuccessful()
-    {
-        return $this->arrayGet($this->data, 'error_code') != null ? TRUE : FALSE;
-    }
-
-    public function isPending()
-    {
-        return strtolower($this->arrayGet($this->data, 'status')) == strtolower(self::STATUS_PENDING);
-    }
-
-    public function getTransactionId()
-    {
-        return $this->arrayGet($this->data, 'external_id');
-    }
-
-    public function getTransactionReference()
-    {
-        return $this->arrayGet($this->data, 'external_id');
-    }
-
-    public function getMessage()
-    {
-        return $this->arrayGet($this->data, 'message');
-    }
-
-    public function arrayGet($data, $key, $default = null)
-    {
-        if (!isset($data[$key])) {
-            return $default;
-        }
-
-        return $data[$key];
     }
 }

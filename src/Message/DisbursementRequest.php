@@ -42,13 +42,15 @@ class DisbursementRequest extends AbstractRequest
         return [
             'reference' => (string)$this->getReferenceId(),
             'disbursements' => [
-                'reference_id' => (string)$this->getReferenceId(),
-                'amount' => intval($this->getAmount()),
-                'description' => $this->getDescription(),
-                'channel_code' => (string)$this->getChannelCode(),
-                'currency' => (string)$this->getCurrency(),
-                'account_name' => (string)$this->getAccountName(),
-                'account_number' => (string)$this->getAccountNumber(),
+                [
+                    'reference_id' => (string)$this->getReferenceId(),
+                    'amount' => intval($this->getAmount()),
+                    'description' => $this->getDescription(),
+                    'channel_code' => (string)$this->getChannelCode(),
+                    'currency' => (string)$this->getCurrency(),
+                    'account_name' => (string)$this->getAccountName(),
+                    'account_number' => (string)$this->getAccountNumber(),
+                ]
             ]
         ];
     }
